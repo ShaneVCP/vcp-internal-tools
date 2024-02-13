@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input {
+    border-radius: 0.375rem;
+    background-color: #F3FDFB;
+    border-color: #1793CA;
+    border-width: 1px;
+}
+
+button {
+    background-color: #25CAA9;
+    padding: 15px;
+    color: #F3FDFB;
+    border-radius: 0.375rem;
+}
+
+button[type="submit"] {
+    background-color: #25CAA9;
+    padding: 15px;
+    color: #F3FDFB;
+    border-radius: 0.375rem;
+}
+
+nav {
+    background-color: #FEFEFE;
+}
+
+body {
+    background-color: #F3FDFB;
+}
+
+a.nav-link-underline {
+    border-bottom: 2px solid #1793CA;
+}
