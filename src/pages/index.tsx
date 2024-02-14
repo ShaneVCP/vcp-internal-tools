@@ -1,4 +1,3 @@
-import '../styles/globals.css';
 import { signIn, useSession } from "next-auth/react";
 
 export default function Welcome() {
