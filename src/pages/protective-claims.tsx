@@ -1,5 +1,3 @@
-import Navbar from "@/components/navbar";
-import '../styles/globals.css';
 import { FormEvent, useState } from "react";
 import { useSession } from "next-auth/react";
 import NotAuthorized from "@/components/not-authorized";
