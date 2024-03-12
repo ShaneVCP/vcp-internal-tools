@@ -18,7 +18,7 @@ export default function Welcome() {
             <div className="flex flex-col items-center justify-center h-[calc(100vh-90px)]">
                 <div className="text-xl">VerAleo Capital Partners</div>
                 <div className="text-lg">Internal Tools</div>
-                {getSignInButton()}
+                {/* {getSignInButton()} */}
             </div>
         </>
         )

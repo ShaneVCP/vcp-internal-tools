@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import { useState } from 'react';
 
 export default function Navbar() {
     const { status } = useSession();
@@ -32,7 +31,7 @@ export default function Navbar() {
 
     return (
         <div>
-            <nav className='flex flex-row items-center justify-between w-full'>
+            <nav className='flex flex-row items-center justify-between w-full h-24'>
                 <Link href="/" id="home-nav-link" className='nav-link flex-none cursor-pointer' onClick={() => setUnderline('home-nav-link')}>
                     <Image width={300} height={90} src="/veraleo_logo.png" alt="VerAleo Logo"/>
                 </Link>

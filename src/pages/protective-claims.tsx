@@ -9,9 +9,9 @@ function ProtectiveClaims() {
     const [downloadURL, setDownloadURL] = useState("");
     const [entityName, setEntityName] = useState("");
 
-    if (status !== "authenticated") {
-        return <NotAuthorized />
-    }
+    // if (status !== "authenticated") {
+    //     return <NotAuthorized />
+    // }
 
     if (loading) {
         return <Loading />
@@ -62,62 +62,7 @@ function ProtectiveClaims() {
     return (
         <>
             <div className="flex flex-col items-center justify-center h-[calc(100vh-90px)] text-xl">
-                <div className="bg-[#FEFEFE] border-2 border-blue-300 w-auto h-auto rounded-md flex flex-col justify-top">
-                    <div className="mt-4 self-center">Protective Claims Generator</div>
-                    <form onSubmit={sendGenerateRequest}>
-                        <div className="flex flex-col items-start mt-2 ml-4 mr-4 w-[calc(100vw - 1rem)]">
-                            <div className="border-b-2 border-blue-300 pb-0">Entity Information</div>
-                            <div className="flex flex-row mt-4 w-full justify-between">
-                                <div>Entity name</div>
-                                <input type="text" name="entity_name" className=" ml-8 text-center"></input>
-                            </div>
-                            <div className="flex flex-row mt-4 w-full justify-between">
-                                <div>Address</div>
-                                <input type="address" name="address" className=" ml-8 text-center"></input>
-                            </div>
-                            <div className="flex flex-row mt-4 w-full justify-between">
-                                <div className="flex flex-row w-full">
-                                    <div>City</div>
-                                    <input type="text" name="city" className="ml-4 w-36 text-center"></input>
-                                </div>
-                                <div className="flex flex-row mr-12">
-                                    <div>State</div>
-                                    <input type="text" name="state" className="ml-4 w-12 text-center"></input>
-                                </div>
-                            </div>
-                            <div className="flex flex-row mt-4 w-full justify-between">
-                                <div className="flex flex-row">
-                                    <div>Zip code</div>
-                                    <input type="text" name="zip_code" className="ml-2 w-24 text-center"></input>
-                                </div>
-                                <div className="flex flex-row ml-4">
-                                    <div>EIN</div>
-                                    <input type="text" name="ein1" className="ml-2 w-12 text-center"></input>
-                                    <div className="ml-2">-</div>
-                                    <input type="text" name="ein2" className="ml-2 w-24 text-center"></input>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex flex-col items-start mt-4 ml-4 mr-4 w-[calc(100vw - 1rem)]">
-                            <div className="border-b-2 border-blue-300 pb-0">Authorized signatory</div>
-                            <div className="flex flex-row mt-4 w-full justify-between">
-                                <div>Name</div>
-                                <input type="text" name="authorized_signatory_name" className="ml-8 text-center"></input>
-                            </div>
-                            <div className="flex flex-row mt-4 w-full justify-between">
-                                <div>Title</div>
-                                <input type="text" name="authorized_signatory_title" className="ml-8 text-center"></input>
-                            </div>
-                        </div>
-                        <div className="flex flex-row justify-start items-baseline ml-4 mt-4">
-                            <div>Amend to Zero</div>
-                            <input type="checkbox" name="zero" className="ml-4 w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded  focus:ring-2 dark:bg-gray-700 dark:border-gray-600"></input>
-                        </div>
-                            <div className="mt-8 mb-4 w-full flex justify-center">
-                                <button type="submit" className="p-4" disabled={false}>Generate Protective Claim</button>
-                        </div>
-                    </form>
-                </div>
+
             </div>
         </>
     )
