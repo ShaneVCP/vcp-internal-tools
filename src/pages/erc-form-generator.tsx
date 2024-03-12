@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import Loading from "@/components/loading";
@@ -49,7 +49,14 @@ const Checkbox941x = (params: { quarter: string; year: string; }) => {
 export default function ERCFormGenerator() {
     const [is941xChecked, setIs941xChecked] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isAuthCheckComplete, setIsAuthCheckComplete] = useState(false);
     const { status } = useSession();
+
+    useEffect(() => {
+        if (status === 'authenticated' || status === 'unauthenticated') {
+            setIsAuthCheckComplete(true);
+        }
+    }, [status])
 
     const handle941xCheckboxChange = (event: { target: { checked: boolean | ((prevState: boolean) => boolean); }; }) => {
         setIs941xChecked(event.target.checked);
@@ -112,8 +119,10 @@ export default function ERCFormGenerator() {
             console.error('Error:', error);
         }
     }
-    
-    if (status !== 'authenticated') {
+    if (!isAuthCheckComplete) {
+        return <div></div>
+    }
+    else if (status !== 'authenticated') {
         return <NotAuthorized />
     } else {
         return (
