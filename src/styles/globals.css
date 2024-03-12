@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Jakarta+Sans+Plus:wght@400;700&display=swap');
+
 
 nav {
     background-color: #FEFEFE;
@@ -8,4 +10,5 @@ nav {
 
 body {
     background-color: #FEFEFE;
+    font-family: 'Jakarta Sans Plus', sans-serif;
 }
