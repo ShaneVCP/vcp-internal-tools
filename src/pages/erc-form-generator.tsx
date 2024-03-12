@@ -51,10 +51,6 @@ export default function ERCFormGenerator() {
     const [isLoading, setIsLoading] = useState(false);
     const { status } = useSession();
 
-    if (status !== 'authenticated') {
-        return <NotAuthorized />
-    }
-
     const handle941xCheckboxChange = (event: { target: { checked: boolean | ((prevState: boolean) => boolean); }; }) => {
         setIs941xChecked(event.target.checked);
     }
@@ -116,77 +112,81 @@ export default function ERCFormGenerator() {
             console.error('Error:', error);
         }
     }
-
-    return (
-        <div className="flex items-center justify-evenly h-[calc(100vh-98px)] w-full">
-            <div className="border p-8 border-black rounded w-1/3 min-w-min shadow-lg">
-                <form className="flex flex-col" id="company-information">
-                    <div className="underline text-2xl">Entity Information</div>
-                    <label htmlFor="taxpayer-name" className="text-lg">Entity Name</label>
-                    <input type="text" className="pl-1 border border-black rounded shadow-md text-lg" id="taxpayer-name"></input>
-                    <label htmlFor="ein1 ein2" className="mt-1 text-lg">EIN</label>
-                    <div className="flex">
-                        <input type="text" maxLength={2} id="ein1" className="w-8 border border-black rounded shadow-md text-lg text-center"></input>
-                        <div className="ml-2 mr-2">-</div>
-                        <input type="text" maxLength={7} id="ein2" className="w-24 border border-black rounded shadow-md text-lg text-center"></input>
-                    </div>
-                    <label htmlFor="address" className="mt-1 text-lg">Address</label>
-                    <input type="text" className="pl-1 border border-black rounded shadow-md text-lg" id="address"></input>
-                    <label htmlFor="city" className="mt-1 text-lg">City</label>
-                    <input type="text" className="pl-1 w-52 border border-black rounded shadow-md text-lg" id="city"></input>
-                    <div className="flex flex-row justify-between w-52">
-                        <div className="flex flex-col mt-1">
-                            <label htmlFor="state" className="text-lg">State</label>
-                            <input type="text" className="pl-1 w-16 border border-black rounded shadow-md text-lg" id="state"></input>
+    
+    if (status !== 'authenticated') {
+        return <NotAuthorized />
+    } else {
+        return (
+            <div className="flex items-center justify-evenly h-[calc(100vh-98px)] w-full">
+                <div className="border p-8 border-black rounded w-1/3 min-w-min shadow-lg">
+                    <form className="flex flex-col" id="company-information">
+                        <div className="underline text-2xl">Entity Information</div>
+                        <label htmlFor="taxpayer-name" className="text-lg">Entity Name</label>
+                        <input type="text" className="pl-1 border border-black rounded shadow-md text-lg" id="taxpayer-name"></input>
+                        <label htmlFor="ein1 ein2" className="mt-1 text-lg">EIN</label>
+                        <div className="flex">
+                            <input type="text" maxLength={2} id="ein1" className="w-8 border border-black rounded shadow-md text-lg text-center"></input>
+                            <div className="ml-2 mr-2">-</div>
+                            <input type="text" maxLength={7} id="ein2" className="w-24 border border-black rounded shadow-md text-lg text-center"></input>
                         </div>
-                        <div className="flex flex-col mt-1">
-                            <label htmlFor="zip" className="text-lg">Zip</label>
-                            <input type="text" className="pl-1 w-24 border border-black rounded shadow-md text-lg" id="zip"></input>
-                        </div>
-                    </div>
-                    <div className="underline mt-4 text-2xl">Signer Information</div>
-                    <label htmlFor="signer-name" className="mt-1 text-lg">Name</label>
-                    <input id="signer-name" type="text" className="pl-1 border border-black rounded shadow-md text-lg"></input>
-                    <label htmlFor="signer-title" className="mt-1 text-lg">Title</label>
-                    <input id="signer-title" type="text" className="pl-1 border border-black rounded shadow-md text-lg"></input>
-                    <label htmlFor="phone" className="mt-1 text-lg">Phone</label>
-                    <input id="phone" type="text" className="w-52 pl-1 border border-black rounded shadow-md text-lg"></input>
-                </form>
-            </div>
-            <div className="flex flex-col items-center">
-                <div className="border p-8 border-black rounded min-w-80 h-[450px] overflow-y-scroll shadow-lg">
-                    <form id="forms-to-generate">
-                        <div className="flex flex-row items-center">
-                            <input id="8821" type="checkbox" className="w-6 h-6 shadow-md"></input>
-                            <label htmlFor="8821" className="ml-2 text-2xl">8821</label>
-                            <input id="2848" type="checkbox" className="w-6 h-6 ml-4 shadow-md"></input>
-                            <label htmlFor="2848" className="ml-2 text-2xl">2848</label>
-                        </div>
-                        <div className="flex items-center mt-2">
-
-                        <input id="941x" type="checkbox" className="w-6 h-6 shadow-md" onChange={handle941xCheckboxChange}></input>
-                        <label htmlFor="941x" className="ml-2 text-2xl">941X</label>
-                        </div>
-                        {is941xChecked && (
-                            <div className="ml-4">
-                                <Checkbox941x quarter="2" year="2020" />
-                                <Checkbox941x quarter="3" year="2020" />
-                                <Checkbox941x quarter="4" year="2020" />
-                                <Checkbox941x quarter="1" year="2021" />
-                                <Checkbox941x quarter="2" year="2021" />
-                                <Checkbox941x quarter="3" year="2021" />
+                        <label htmlFor="address" className="mt-1 text-lg">Address</label>
+                        <input type="text" className="pl-1 border border-black rounded shadow-md text-lg" id="address"></input>
+                        <label htmlFor="city" className="mt-1 text-lg">City</label>
+                        <input type="text" className="pl-1 w-52 border border-black rounded shadow-md text-lg" id="city"></input>
+                        <div className="flex flex-row justify-between w-52">
+                            <div className="flex flex-col mt-1">
+                                <label htmlFor="state" className="text-lg">State</label>
+                                <input type="text" className="pl-1 w-16 border border-black rounded shadow-md text-lg" id="state"></input>
                             </div>
-                        )}
+                            <div className="flex flex-col mt-1">
+                                <label htmlFor="zip" className="text-lg">Zip</label>
+                                <input type="text" className="pl-1 w-24 border border-black rounded shadow-md text-lg" id="zip"></input>
+                            </div>
+                        </div>
+                        <div className="underline mt-4 text-2xl">Signer Information</div>
+                        <label htmlFor="signer-name" className="mt-1 text-lg">Name</label>
+                        <input id="signer-name" type="text" className="pl-1 border border-black rounded shadow-md text-lg"></input>
+                        <label htmlFor="signer-title" className="mt-1 text-lg">Title</label>
+                        <input id="signer-title" type="text" className="pl-1 border border-black rounded shadow-md text-lg"></input>
+                        <label htmlFor="phone" className="mt-1 text-lg">Phone</label>
+                        <input id="phone" type="text" className="w-52 pl-1 border border-black rounded shadow-md text-lg"></input>
                     </form>
                 </div>
-                {isLoading ? (<Loading />) : (
-                    <div className="mt-16">
-                    <button onClick={handleFormSubmit} className="border border-black hover:border-veraleo-blue-primary rounded-full p-8 hover:bg-veraleo-blue-primary cursor-pointer ease-out hover:ease-in transition duration-100 hover:text-veraleo-text-white">
-                        <FontAwesomeIcon icon={faArrowRight} className="fa-solid fa-arrow-right text-6xl"/>
-                    </button>
+                <div className="flex flex-col items-center">
+                    <div className="border p-8 border-black rounded min-w-80 h-[450px] overflow-y-scroll shadow-lg">
+                        <form id="forms-to-generate">
+                            <div className="flex flex-row items-center">
+                                <input id="8821" type="checkbox" className="w-6 h-6 shadow-md"></input>
+                                <label htmlFor="8821" className="ml-2 text-2xl">8821</label>
+                                <input id="2848" type="checkbox" className="w-6 h-6 ml-4 shadow-md"></input>
+                                <label htmlFor="2848" className="ml-2 text-2xl">2848</label>
+                            </div>
+                            <div className="flex items-center mt-2">
+
+                            <input id="941x" type="checkbox" className="w-6 h-6 shadow-md" onChange={handle941xCheckboxChange}></input>
+                            <label htmlFor="941x" className="ml-2 text-2xl">941X</label>
+                            </div>
+                            {is941xChecked && (
+                                <div className="ml-4">
+                                    <Checkbox941x quarter="2" year="2020" />
+                                    <Checkbox941x quarter="3" year="2020" />
+                                    <Checkbox941x quarter="4" year="2020" />
+                                    <Checkbox941x quarter="1" year="2021" />
+                                    <Checkbox941x quarter="2" year="2021" />
+                                    <Checkbox941x quarter="3" year="2021" />
+                                </div>
+                            )}
+                        </form>
+                    </div>
+                    {isLoading ? (<Loading />) : (
+                        <div className="mt-16">
+                        <button onClick={handleFormSubmit} className="border border-black hover:border-veraleo-blue-primary rounded-full p-8 hover:bg-veraleo-blue-primary cursor-pointer ease-out hover:ease-in transition duration-100 hover:text-veraleo-text-white">
+                            <FontAwesomeIcon icon={faArrowRight} className="fa-solid fa-arrow-right text-6xl"/>
+                        </button>
+                    </div>
+                    )}
                 </div>
-                )}
             </div>
-        </div>
-    )
+        )
+    }
 }
