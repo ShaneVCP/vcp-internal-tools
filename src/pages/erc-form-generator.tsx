@@ -18,9 +18,11 @@ const Checkbox941x = (params: { quarter: string; year: string; }) => {
     }
 
     return (
-        <div>
-            <input type="checkbox" id={checkbox_id} onChange={handleQuarterCheckboxChange}></input>
-            <label htmlFor={checkbox_id} className="ml-2">Q{params.quarter} {params.year}</label>
+        <div className="mt-1">
+            <div className="flex items-center">
+                <input type="checkbox" id={checkbox_id} className="w-5 h-5 shadow-md" onChange={handleQuarterCheckboxChange}></input>
+                <label htmlFor={checkbox_id} className="ml-2">Q{params.quarter} {params.year}</label>
+            </div>
             {isQuarterChecked && (
                 <div className="flex flex-col ml-4">
                     <div className="flex flex-row">
@@ -95,6 +97,7 @@ export default function ERCFormGenerator() {
             if (response.ok) {
                 const responseData = await response.json();
                 console.log('Success: ', responseData);
+                window.open(responseData['download_url'], '_blank');
             } else {
                 console.log(response);
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -105,52 +108,55 @@ export default function ERCFormGenerator() {
     }
 
     return (
-        <div className="flex items-center justify-evenly h-[calc(100vh-96px)] w-full">
-            <div className="border p-8 border-black rounded">
+        <div className="flex items-center justify-evenly h-[calc(100vh-98px)] w-full">
+            <div className="border p-8 border-black rounded w-1/3 min-w-min shadow-lg">
                 <form className="flex flex-col" id="company-information">
-                    <div className="underline">Entity Information</div>
-                    <label htmlFor="taxpayer-name">Entity Name</label>
-                    <input type="text" className="pl-1" id="taxpayer-name"></input>
-                    <label htmlFor="ein1 ein2">EIN</label>
+                    <div className="underline text-2xl">Entity Information</div>
+                    <label htmlFor="taxpayer-name" className="text-lg">Entity Name</label>
+                    <input type="text" className="pl-1 border border-black rounded shadow-md text-lg" id="taxpayer-name"></input>
+                    <label htmlFor="ein1 ein2" className="mt-1 text-lg">EIN</label>
                     <div className="flex">
-                        <input type="text" id="ein1" className="w-8 pl-1"></input>
-                        <div className="ml-4 mr-4">-</div>
-                        <input type="text" id="ein2" className="w-24 pl-1"></input>
+                        <input type="text" maxLength={2} id="ein1" className="w-8 border border-black rounded shadow-md text-lg text-center"></input>
+                        <div className="ml-2 mr-2">-</div>
+                        <input type="text" maxLength={7} id="ein2" className="w-24 border border-black rounded shadow-md text-lg text-center"></input>
                     </div>
-                    <label htmlFor="address">Address</label>
-                    <input type="text" className="pl-1" id="address"></input>
-                    <label htmlFor="city">City</label>
-                    <input type="text" className="pl-1" id="city"></input>
-                    <div className="flex flex-row">
+                    <label htmlFor="address" className="mt-1 text-lg">Address</label>
+                    <input type="text" className="pl-1 border border-black rounded shadow-md text-lg" id="address"></input>
+                    <label htmlFor="city" className="mt-1 text-lg">City</label>
+                    <input type="text" className="pl-1 w-52 border border-black rounded shadow-md text-lg" id="city"></input>
+                    <div className="flex flex-row justify-between w-52">
+                        <div className="flex flex-col mt-1">
+                            <label htmlFor="state" className="text-lg">State</label>
+                            <input type="text" className="pl-1 w-16 border border-black rounded shadow-md text-lg" id="state"></input>
+                        </div>
                         <div className="flex flex-col">
-                            <label htmlFor="state">State</label>
-                            <input type="text" className="pl-1 w-16" id="state"></input>
-                        </div>
-                        <div className="flex flex-col ml-8">
-                            <label htmlFor="zip">Zip</label>
-                            <input type="text" className="pl-1 w-24" id="zip"></input>
+                            <label htmlFor="zip" className="text-lg">Zip</label>
+                            <input type="text" className="pl-1 w-24 border border-black rounded shadow-md text-lg" id="zip"></input>
                         </div>
                     </div>
-                    <div className="underline">Signer Information</div>
-                    <label htmlFor="signer-name">Name</label>
-                    <input id="signer-name" type="text" className="pl-1"></input>
-                    <label htmlFor="signer-title">Title</label>
-                    <input id="signer-title" type="text" className="pl-1"></input>
-                    <label htmlFor="phone">Phone</label>
-                    <input id="phone" type="text" className="pl-1"></input>
+                    <div className="underline mt-4 text-2xl">Signer Information</div>
+                    <label htmlFor="signer-name" className="mt-1 text-lg">Name</label>
+                    <input id="signer-name" type="text" className="pl-1 border border-black rounded shadow-md text-lg"></input>
+                    <label htmlFor="signer-title" className="mt-1 text-lg">Title</label>
+                    <input id="signer-title" type="text" className="pl-1 border border-black rounded shadow-md text-lg"></input>
+                    <label htmlFor="phone" className="mt-1 text-lg">Phone</label>
+                    <input id="phone" type="text" className="w-52 pl-1 border border-black rounded shadow-md text-lg"></input>
                 </form>
             </div>
             <div className="flex flex-col items-center">
-                <div className="border p-8 border-black rounded min-w-80 max-h-96 overflow-y-scroll">
+                <div className="border p-8 border-black rounded min-w-80 h-[450px] overflow-y-scroll shadow-lg">
                     <form id="forms-to-generate">
-                        <div className="flex flex-row">
-                            <input id="8821" type="checkbox"></input>
-                            <label htmlFor="8821" className="ml-2">8821</label>
-                            <input id="2848" type="checkbox" className="ml-4"></input>
-                            <label htmlFor="2848" className="ml-2">2848</label>
+                        <div className="flex flex-row items-center">
+                            <input id="8821" type="checkbox" className="w-6 h-6 shadow-md"></input>
+                            <label htmlFor="8821" className="ml-2 text-2xl">8821</label>
+                            <input id="2848" type="checkbox" className="w-6 h-6 ml-4 shadow-md"></input>
+                            <label htmlFor="2848" className="ml-2 text-2xl">2848</label>
                         </div>
-                        <input id="941x" type="checkbox" onChange={handle941xCheckboxChange}></input>
-                        <label htmlFor="941x" className="ml-2">941X</label>
+                        <div className="flex items-center mt-2">
+
+                        <input id="941x" type="checkbox" className="w-6 h-6 shadow-md" onChange={handle941xCheckboxChange}></input>
+                        <label htmlFor="941x" className="ml-2 text-2xl">941X</label>
+                        </div>
                         {is941xChecked && (
                             <div className="ml-4">
                                 <Checkbox941x quarter="2" year="2020" />

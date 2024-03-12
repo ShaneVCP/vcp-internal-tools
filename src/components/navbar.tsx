@@ -31,7 +31,7 @@ export default function Navbar() {
 
     return (
         <div>
-            <nav className='flex flex-row items-center justify-between w-full h-24'>
+            <nav className='flex flex-row items-center w-full h-24 justify-center'>
                 <Link href="/" id="home-nav-link" className='nav-link flex-none cursor-pointer' onClick={() => setUnderline('home-nav-link')}>
                     <Image width={300} height={90} src="/veraleo_logo.png" alt="VerAleo Logo"/>
                 </Link>
@@ -39,7 +39,7 @@ export default function Navbar() {
                     {getNavBarOptions()}
                 </div>
             </nav>
-            <div className='w-11/12 mx-auto my-0 h-0.5 bg-blue-300'></div>
+            <div className='w-11/12 mx-auto my-0 h-0.5 bg-veraleo-blue-primary'></div>
         </div>
     )
 }
