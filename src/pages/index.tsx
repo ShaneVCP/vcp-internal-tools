@@ -6,7 +6,7 @@ export default function Welcome() {
     const getSignInButton = () => {
         if (status !== "authenticated") {
             return (
-                <button onClick={() => signIn()} className='p-3rounded-md cursor-pointer text-lg mt-8'>Sign in</button>
+                <button onClick={() => signIn()} className='border p-4 shadow border-black mt-8 rounded hover:bg-veraleo-blue-primary hover:text-white ease-out hover:ease-in transition duration-100'>Sign in</button>
             )
         } else {
             return <div>Signed in as {session.user?.name}</div>
@@ -15,9 +15,17 @@ export default function Welcome() {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center h-[calc(100vh-90px)]">
-                <div className="text-xl">VerAleo Capital Partners</div>
-                <div className="text-lg">Internal Tools</div>
+            <div className="flex flex-col items-center justify-center h-[calc(100vh-98px)]">
+                <div className="text-4xl">VerAleo Capital Partners</div>
+                <div className="text-2xl">Internal Tools</div>
+                {
+                    status !== "authenticated" ?
+                    (<>
+                        {getSignInButton()}
+                    </>
+                        ) :
+                    <a href="erc-form-generator" className="border p-4 shadow border-black mt-8 rounded hover:bg-veraleo-blue-primary hover:text-white ease-out hover:ease-in transition duration-100">ERC Form Generator</a>
+                }
                 {/* {getSignInButton()} */}
             </div>
         </>

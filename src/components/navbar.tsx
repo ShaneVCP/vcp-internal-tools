@@ -5,17 +5,17 @@ import { useSession } from 'next-auth/react';
 export default function Navbar() {
     const { status } = useSession();
 
-    const getNavBarOptions = () => {
-        if (status !== "authenticated") {
-            return <div />
-        } else {
-            return (
-                <Link href="/protective-claims" id="protective-claims-nav-link" onClick={() => setUnderline('protective-claims-nav-link')} passHref className='nav-link w-auto mr-24 text-xl'>
-                        Protective Claims Generator
-                </Link>
-            )
-        }
-    }
+    // const getNavBarOptions = () => {
+    //     if (status !== "authenticated") {
+    //         return <div />
+    //     } else {
+    //         return (
+    //             <Link href="/protective-claims" id="protective-claims-nav-link" onClick={() => setUnderline('protective-claims-nav-link')} passHref className='nav-link w-auto mr-24 text-xl'>
+    //                     Protective Claims Generator
+    //             </Link>
+    //         )
+    //     }
+    // }
 
     const setUnderline = (navTabId: string) => {
         const navUnderlineClass = 'nav-link-underline';
@@ -32,12 +32,9 @@ export default function Navbar() {
     return (
         <div>
             <nav className='flex flex-row items-center w-full h-24 justify-center'>
-                <Link href="/" id="home-nav-link" className='nav-link flex-none cursor-pointer' onClick={() => setUnderline('home-nav-link')}>
+                <Link href="/" id="home-nav-link" className='nav-link cursor-pointer' onClick={() => setUnderline('home-nav-link')}>
                     <Image width={300} height={90} src="/veraleo_logo.png" alt="VerAleo Logo"/>
                 </Link>
-                <div className='flex flex-none flex-row items-center mr-20 justify-center'>
-                    {getNavBarOptions()}
-                </div>
             </nav>
             <div className='w-11/12 mx-auto my-0 h-0.5 bg-veraleo-blue-primary'></div>
         </div>

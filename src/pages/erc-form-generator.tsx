@@ -2,6 +2,8 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import Loading from "@/components/loading";
+import { useSession } from "next-auth/react";
+import NotAuthorized from "@/components/not-authorized";
 
 
 const Checkbox941x = (params: { quarter: string; year: string; }) => {
@@ -47,6 +49,11 @@ const Checkbox941x = (params: { quarter: string; year: string; }) => {
 export default function ERCFormGenerator() {
     const [is941xChecked, setIs941xChecked] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const { status } = useSession();
+
+    if (status !== 'authenticated') {
+        return <NotAuthorized />
+    }
 
     const handle941xCheckboxChange = (event: { target: { checked: boolean | ((prevState: boolean) => boolean); }; }) => {
         setIs941xChecked(event.target.checked);
@@ -132,7 +139,7 @@ export default function ERCFormGenerator() {
                             <label htmlFor="state" className="text-lg">State</label>
                             <input type="text" className="pl-1 w-16 border border-black rounded shadow-md text-lg" id="state"></input>
                         </div>
-                        <div className="flex flex-col">
+                        <div className="flex flex-col mt-1">
                             <label htmlFor="zip" className="text-lg">Zip</label>
                             <input type="text" className="pl-1 w-24 border border-black rounded shadow-md text-lg" id="zip"></input>
                         </div>
