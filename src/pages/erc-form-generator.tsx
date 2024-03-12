@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
+import Loading from "@/components/loading";
 
 
 const Checkbox941x = (params: { quarter: string; year: string; }) => {
@@ -45,6 +46,7 @@ const Checkbox941x = (params: { quarter: string; year: string; }) => {
 
 export default function ERCFormGenerator() {
     const [is941xChecked, setIs941xChecked] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handle941xCheckboxChange = (event: { target: { checked: boolean | ((prevState: boolean) => boolean); }; }) => {
         setIs941xChecked(event.target.checked);
@@ -89,11 +91,12 @@ export default function ERCFormGenerator() {
         })
         const apiUrl = 'https://ca3qwsudy4.execute-api.us-east-2.amazonaws.com/ercFormGenerator';
         try {
+            setIsLoading(true);
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 body: JSON.stringify(requestBody),
             });
-
+            setIsLoading(false);
             if (response.ok) {
                 const responseData = await response.json();
                 console.log('Success: ', responseData);
@@ -169,11 +172,13 @@ export default function ERCFormGenerator() {
                         )}
                     </form>
                 </div>
-                <div className="mt-16">
+                {isLoading ? (<Loading />) : (
+                    <div className="mt-16">
                     <button onClick={handleFormSubmit} className="border border-black hover:border-veraleo-blue-primary rounded-full p-8 hover:bg-veraleo-blue-primary cursor-pointer ease-out hover:ease-in transition duration-100 hover:text-veraleo-text-white">
                         <FontAwesomeIcon icon={faArrowRight} className="fa-solid fa-arrow-right text-6xl"/>
                     </button>
                 </div>
+                )}
             </div>
         </div>
     )
