@@ -80,7 +80,6 @@ export default function ERCFormGenerator() {
         formsInputs.forEach(input => {
             formData['formsToGenerate'][input.id] = input.checked.toString();
         });
-    
         sendFormGenerateRequest(formData);
     };
 
@@ -152,6 +151,14 @@ export default function ERCFormGenerator() {
                                 <input type="text" className="pl-1 w-24 border border-black rounded shadow-md text-lg" id="zip"></input>
                             </div>
                         </div>
+                        <label htmlFor="date-discovered" className="text-lg mt-1">Date discovered for 941X</label>
+                        <div id="date-discovered" className="flex flex-row items-center">
+                            <input placeholder="MM" id="month" className="w-8 border border-black rounded shadow-md text-center text-lg"></input>
+                            <span className="ml-1">/</span>
+                            <input placeholder="DD" id="day" className="ml-1 w-8 border border-black rounded shadow-md text-center text-lg"></input>
+                            <span className="ml-1">/</span>
+                            <input placeholder="YYYY" id="year" className="ml-1 w-14 border border-black rounded shadow-md text-center text-lg"></input>
+                        </div>
                         <div className="underline mt-4 text-2xl">Signer Information</div>
                         <label htmlFor="signer-name" className="mt-1 text-lg">Name</label>
                         <input id="signer-name" type="text" className="pl-1 border border-black rounded shadow-md text-lg"></input>
@@ -174,6 +181,7 @@ export default function ERCFormGenerator() {
 
                             <input id="941x" type="checkbox" className="w-6 h-6 shadow-md" onChange={handle941xCheckboxChange}></input>
                             <label htmlFor="941x" className="ml-2 text-2xl">941X</label>
+
                             </div>
                             {is941xChecked && (
                                 <div className="ml-4">
