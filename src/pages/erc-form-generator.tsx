@@ -84,7 +84,7 @@ export default function ERCFormGenerator() {
     };
 
     const sendFormGenerateRequest = async (formData: { companyInformation: {[key: string]: FormDataEntryValue }, formsToGenerate: {[key: string]: FormDataEntryValue }}) => {
-        const eligibleForms = ['2848', '8821', 'business-disruption', 'gross-receipts', 'gross-receipts-alternate']
+        const eligibleForms = ['911', '2848', '8821', 'business-disruption', 'gross-receipts', 'gross-receipts-alternate']
         const requestBody: { companyInformation: {[key: string]: FormDataEntryValue }, formsToGenerate: string[] } = {companyInformation: formData.companyInformation, formsToGenerate: []}
         
         Object.keys(formData.formsToGenerate).forEach((key) => {
@@ -176,6 +176,8 @@ export default function ERCFormGenerator() {
                                 <label htmlFor="8821" className="ml-2 text-2xl">8821</label>
                                 <input id="2848" type="checkbox" className="w-6 h-6 ml-4 shadow-md"></input>
                                 <label htmlFor="2848" className="ml-2 text-2xl">2848</label>
+                                <input id="911" type="checkbox" className="w-6 h-6 ml-4 shadow-md"></input>
+                                <label htmlFor="911" className="ml-2 text-2xl">911</label>
                             </div>
                             <div className="flex items-center mt-2">
 
@@ -185,9 +187,6 @@ export default function ERCFormGenerator() {
                             </div>
                             {is941xChecked && (
                                 <div className="ml-4">
-                                    <Checkbox941x quarter="2" year="2020" />
-                                    <Checkbox941x quarter="3" year="2020" />
-                                    <Checkbox941x quarter="4" year="2020" />
                                     <Checkbox941x quarter="1" year="2021" />
                                     <Checkbox941x quarter="2" year="2021" />
                                     <Checkbox941x quarter="3" year="2021" />
