@@ -4,6 +4,7 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import Loading from "@/components/loading";
 import { useSession } from "next-auth/react";
 import NotAuthorized from "@/components/not-authorized";
+import HubSpotModal from "@/components/hubspotModal";
 
 
 const Checkbox941x = (params: { quarter: string; year: string; }) => {
@@ -13,8 +14,6 @@ const Checkbox941x = (params: { quarter: string; year: string; }) => {
     const business_disruption_id = `q-${params.quarter}-y-${params.year}-business-disruption`;
     const gross_receipts_id = `q-${params.quarter}-y-${params.year}-gross-receipts`;
     const gross_receipts_alternate_id = `q-${params.quarter}-y-${params.year}-gross-receipts-alternate`;
-
-
 
     const handleQuarterCheckboxChange = (event: { target: { checked: boolean | ((prevState: boolean) => boolean); }; }) => {
         setIsQuarterChecked(event.target.checked);
@@ -50,6 +49,8 @@ export default function ERCFormGenerator() {
     const [is941xChecked, setIs941xChecked] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isAuthCheckComplete, setIsAuthCheckComplete] = useState(false);
+    const [hubspotModalOpen, setHubspotModalOpen] = useState(false);
+    const [hubspotSelectedCompanyInfo, setHubspotSelectedCompanyInfo] = useState(null as any);
     const { status } = useSession();
 
     useEffect(() => {
@@ -118,16 +119,75 @@ export default function ERCFormGenerator() {
             console.error('Error:', error);
         }
     }
+
+    useEffect(() => {
+        if (!hubspotModalOpen && hubspotSelectedCompanyInfo) {
+          setFieldsFromHSModal();
+        }
+      }, [hubspotModalOpen, hubspotSelectedCompanyInfo]);
+
+    const handleCompanySelect = (company: any) => {
+        setHubspotModalOpen(false);
+        setHubspotSelectedCompanyInfo(company);
+    };
+
+    const setFieldsFromHSModal = () => {
+        console.log(hubspotSelectedCompanyInfo);
+        if (hubspotSelectedCompanyInfo) {
+            const taxpayerNameInput = document.querySelector('#company-information #taxpayer-name') as HTMLInputElement;
+            if (taxpayerNameInput) {
+              taxpayerNameInput.value = hubspotSelectedCompanyInfo.name;
+            }
+        
+            const ein1Input = document.querySelector('#company-information #ein1') as HTMLInputElement;
+            const ein2Input = document.querySelector('#company-information #ein2') as HTMLInputElement;
+            if (ein1Input && ein2Input && hubspotSelectedCompanyInfo.ein) {
+              const einParts = hubspotSelectedCompanyInfo.ein.split('-');
+              ein1Input.value = einParts[0];
+              ein2Input.value = einParts[1];
+            }
+        
+            const addressInput = document.querySelector('#company-information #address') as HTMLInputElement;
+            if (addressInput) {
+              addressInput.value = hubspotSelectedCompanyInfo.address;
+            }
+
+            const cityInput = document.querySelector('#company-information #city') as HTMLInputElement;
+            if (cityInput) {
+                cityInput.value = hubspotSelectedCompanyInfo.city;
+            }
+
+            const stateInput = document.querySelector('#company-information #state') as HTMLInputElement;
+            if (stateInput) {
+                stateInput.value = hubspotSelectedCompanyInfo.state;
+            }
+
+            const zipInput = document.querySelector('#company-information #zip') as HTMLInputElement;
+            if (zipInput) {
+                zipInput.value = hubspotSelectedCompanyInfo.zip;
+            }
+        }
+    }
+
     if (!isAuthCheckComplete) {
         return <div></div>
     }
     else if (status !== 'authenticated') {
         return <NotAuthorized />
-    } else {
+    } 
+    if (hubspotModalOpen) {
+        return (
+            <HubSpotModal closeHubSpotModal={() => setHubspotModalOpen(false)} setSelectedHubSpotInfo={handleCompanySelect} />
+        )
+    }
+    else {
         return (
             <div className="flex items-center justify-evenly h-[calc(100vh-98px)] w-full">
                 <div className="border p-8 border-black rounded w-1/3 min-w-min shadow-lg">
                     <form className="flex flex-col" id="company-information">
+                        <div className="flex w-full justify-center">
+                            <button className="p-1 mb-2 border rounded border-black hover:border-veraleo-blue-primary hover:bg-veraleo-blue-primary cursor-pointer ease-out hover:ease-in transition duration-100 hover:text-veraleo-text-white" onClick={() => setHubspotModalOpen(true)}>Hubspot Import</button>
+                        </div>
                         <div className="underline text-2xl">Entity Information</div>
                         <label htmlFor="taxpayer-name" className="text-lg">Entity Name</label>
                         <input type="text" className="pl-1 border border-black rounded shadow-md text-lg" id="taxpayer-name"></input>
