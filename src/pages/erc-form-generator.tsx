@@ -492,6 +492,21 @@ export default function ERCFormGenerator() {
 									<div className='ml-4'>
 										<Checkbox941x
 											formYear='2021'
+											quarter='2'
+											year='2020'
+										/>
+										<Checkbox941x
+											formYear='2021'
+											quarter='3'
+											year='2020'
+										/>
+										<Checkbox941x
+											formYear='2021'
+											quarter='4'
+											year='2020'
+										/>
+										<Checkbox941x
+											formYear='2021'
 											quarter='1'
 											year='2021'
 										/>
